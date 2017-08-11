@@ -42,6 +42,14 @@
      // var latlon = position.coords.latitude + "," + position.coords.longitude;  
     var lng = position.coords.longitude
     var lat = position.coords.latitude        
+    var alt = position.coords.altitude        
+    var accuracy = position.coords.accuracy        
+    var altAccuracy = position.coords.altitudeAccuracy   
+    var heading = position.coords.heading       
+    var speed = position.coords.speed
+             
+             console.log([alt,heading,speed])
+             
     d3.select("#coordinates").html("Lat:"+lat+"<br/>Lng:"+lng)
     
     var locationUrl = "https://data.fcc.gov/api/block/2010/find?format=jsonp&latitude="+lat+"&longitude="+lng   
