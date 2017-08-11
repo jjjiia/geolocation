@@ -62,7 +62,8 @@
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation', function(event) {
       // console.log(event.alpha + ' : ' + event.beta + ' : ' + event.gamma);
-        d3.select("#orientation").html(Math.round(event.alpha*100)/100 + ' : ' + Math.round(event.beta*100)/100 + ' : ' 
+        d3.select("#orientation").html("from north: "+Math.round(event.alpha))
+      //+ ' : ' + Math.round(event.beta*100)/100 + ' : ' 
         + Math.round(event.gamma*100)/100)
       });
     }else{
