@@ -45,9 +45,8 @@
     d3.select("#coordinates").html("Lat:"+lat+"<br/>Lng:"+lng)
     
     var locationUrl = "https://data.fcc.gov/api/block/2010/find?format=jsonp&latitude="+lat+"&longitude="+lng   
-    
-    var censusReporter = "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=16000US5367000"
-    getJsonP(locationUrl,"formatCensusIds")
+    getJson(locationUrl,"jsonp","formatCensusIds")
+  
   }
 
 getLocation() 
@@ -56,18 +55,31 @@ var sampleLocation = [40.718914, -73.9547791]
 var sampleUrl_fcc = "https://data.fcc.gov/api/block/2010/find?format=jsonp&latitude=40.718914&longitude=-73.9547791"
 var smapleUrl_census = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=4600+Silver+Hill+Rd%2C+Suitland%2C+MD+20746&benchmark=9&format=json"
 
-function getJsonP(url,callBack){
+function getJson(url,type,callBack){
   $.ajax({
     url: url,
-    dataType: "jsonp",
+    dataType: type,
     jsonpCallback: callBack
   });
 }
 
+
 function formatCensusIds(json){
   d3.select("#censusLabel").html("Block: "+json.Block.FIPS+"<br/>County: "+json.County.FIPS+"<br/>State: "+json.State.FIPS) 
-  
   pub.censusId = json.Block.FIPS
+    console.log(pub.censusId.slice(0,-3))
+  var tableName = "B01002"
+  var geoid = "15000US"+pub.censusId.slice(0,-3)
+  var censusReporter = "https://api.censusreporter.org/1.0/data/show/latest?table_ids="+tableName+"&geo_ids="+geoid
+  $.getJSON( censusReporter, function( data ) {
+    
+    console.log(data)
+    d3.select("#data").html(data.tables[tableName]["title"]+"</br>"
+    +data.data[geoid][tableName]["estimate"][tableName+"001"]+"</br>"
+    +data.data[geoid][tableName]["estimate"][tableName+"002"]+"</br>"
+    +data.data[geoid][tableName]["estimate"][tableName+"003"]
+  )
+  });
 }
 
 //https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=16000US5367000
