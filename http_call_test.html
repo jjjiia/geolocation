@@ -55,17 +55,20 @@
              
              console.log([alt,heading,speed])
              
-    d3.select("#coordinates").html("Lat:"+lat+"<br/>Lng:"+lng)//+"<br/>"+speed+"<br/>"+alt+"<br/>"+heading)
+    d3.select("#coordinates").html("Lat: "+lat+"<br/>Lng: "+lng+"<br/>Alt: "+alt)//+"<br/>"+speed+"<br/>"+alt+"<br/>"+heading)
     
     var locationUrl = "https://data.fcc.gov/api/block/2010/find?format=jsonp&latitude="+lat+"&longitude="+lng   
     getJson(locationUrl,"jsonp","formatCensusIds")
-  
-    window.addEventListener('deviceorientation', function(event) {
-    // console.log(event.alpha + ' : ' + event.beta + ' : ' + event.gamma);
-      d3.select("#orientation").html(Math.round(event.alpha*100)/100 + ' : ' + Math.round(event.beta*100)/100 + ' : ' + Math.round(event.gamma*100)/100)
-    });
-  
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', function(event) {
+      // console.log(event.alpha + ' : ' + event.beta + ' : ' + event.gamma);
+        d3.select("#orientation").html(Math.round(event.alpha*100)/100 + ' : ' + Math.round(event.beta*100)/100 + ' : ' 
+        + Math.round(event.gamma*100)/100)
+      });
+    }else{
+        d3.select("#orientation").html("no orientation data from device")
     }
+}
 
 getLocation() 
 
