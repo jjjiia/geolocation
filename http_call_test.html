@@ -50,7 +50,7 @@
              
              console.log([alt,heading,speed])
              
-    d3.select("#coordinates").html("Lat:"+lat+"<br/>Lng:"+lng)
+    d3.select("#coordinates").html("Lat:"+lat+"<br/>Lng:"+lng+"<br/>"+speed+"<br/>"+alt+"<br/>"+heading)
     
     var locationUrl = "https://data.fcc.gov/api/block/2010/find?format=jsonp&latitude="+lat+"&longitude="+lng   
     getJson(locationUrl,"jsonp","formatCensusIds")
