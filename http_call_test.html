@@ -26,9 +26,11 @@
     censusId:null,
     coordinates:null
   }
-      d3.select("body").append("div").attr("id","coordinates").html("test")
-      d3.select("body").append("div").attr("id","censusLabel").html("test")
-      d3.select("body").append("div").attr("id","data").html("test")
+      d3.select("body").append("div").attr("class","title").attr("id","title").html("you are here")
+      d3.select("body").append("div").attr("class","section").attr("id","coordinates").html("coordinates")
+      d3.select("body").append("div").attr("class","section").attr("id","orientation").html("orientation")
+      d3.select("body").append("div").attr("class","section").attr("id","censusLabel").html("census geography")
+      d3.select("body").append("div").attr("class","section").attr("id","data").html("data")
   
   function getLocation() {
       if (navigator.geolocation) {
@@ -37,9 +39,12 @@
           x.innerHTML = "Geolocation is not supported by this browser.";
       }
   }
-
+  function showHeading(position){
+    console.log(position)
+  }
   function showPosition(position) {
      // var latlon = position.coords.latitude + "," + position.coords.longitude;  
+     console.log(position)
     var lng = position.coords.longitude
     var lat = position.coords.latitude        
     var alt = position.coords.altitude        
@@ -50,12 +55,17 @@
              
              console.log([alt,heading,speed])
              
-    d3.select("#coordinates").html("Lat:"+lat+"<br/>Lng:"+lng+"<br/>"+speed+"<br/>"+alt+"<br/>"+heading)
+    d3.select("#coordinates").html("Lat:"+lat+"<br/>Lng:"+lng)//+"<br/>"+speed+"<br/>"+alt+"<br/>"+heading)
     
     var locationUrl = "https://data.fcc.gov/api/block/2010/find?format=jsonp&latitude="+lat+"&longitude="+lng   
     getJson(locationUrl,"jsonp","formatCensusIds")
   
-  }
+    window.addEventListener('deviceorientation', function(event) {
+      console.log(event.alpha + ' : ' + event.beta + ' : ' + event.gamma);
+      d3.select("#orientation").html(event.alpha + ' : ' + event.beta + ' : ' + event.gamma)
+    });
+  
+    }
 
 getLocation() 
 
