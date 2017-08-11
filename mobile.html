@@ -18,6 +18,7 @@
 function errorCallback() {}
  
 function successCallback(position) {
+  console.log(position.coords)
       var mapUrl = "http://maps.google.com/maps/api/staticmap?center=";
       mapUrl = mapUrl + position.coords.latitude + ',' + position.coords.longitude;
       mapUrl = mapUrl + '&zoom=15&size=512x512&maptype=roadmap&sensor=false';
