@@ -61,8 +61,8 @@
     getJson(locationUrl,"jsonp","formatCensusIds")
   
     window.addEventListener('deviceorientation', function(event) {
-      console.log(event.alpha + ' : ' + event.beta + ' : ' + event.gamma);
-      d3.select("#orientation").html(event.alpha + ' : ' + event.beta + ' : ' + event.gamma)
+    // console.log(event.alpha + ' : ' + event.beta + ' : ' + event.gamma);
+      d3.select("#orientation").html(Math.round(event.alpha*100)/100 + ' : ' + Math.round(event.beta*100)/100 + ' : ' + Math.round(event.gamma*100)/100)
     });
   
     }
