@@ -1,8 +1,3 @@
-var pub = {
-    censusId:null,
-    coordinates:null,
-    direction:null
-}
 var tables = []
 function getLocation() {
   if (navigator.geolocation) {
@@ -16,21 +11,9 @@ function formatLocation(position){
     var lng = position.coords.longitude
     var lat = position.coords.latitude        
     var alt = position.coords.altitude 
+    pub.coordinates = [lat,lng]
     d3.select("#coordinates").html("Lat: "+lat+"<br/>Lng: "+lng+"<br/>Alt: "+alt)//+"<br/>"+speed+"<br/>"+alt+"<br/>"+heading)
     return [lat,lng]
-}
-
-function getDirection(){
-    if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', function(event) {
-                // console.log(event.alpha + ' : ' + event.beta + ' : ' + event.gamma);
-                var direction = Math.round(event.alpha)
-                d3.select("#orientation").html("from north: "+direction)
-                return direction
-        });
-    }else{
-        d3.select("#orientation").html("no orientation data from device")
-    }
 }
 
 //var sampleLocation = [40.718914, -73.9547791]  
@@ -99,5 +82,5 @@ function formatCensusData(data,tableCode){
     return formattedData
 }
 
-getDirection()
+
 getLocation() 
