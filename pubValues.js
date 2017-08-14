@@ -4,5 +4,9 @@ var pub = {
     censusId:null,
     direction:null,
     lat:null,
-    lng:null
+    lng:null,
+    coordinates:[],
+    coordinatesCounter:0,
+    coordinateIds:[],
+    coordinatesData:{}
 }

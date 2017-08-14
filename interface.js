@@ -4,3 +4,6 @@
   d3.select("body").append("div").attr("class","section").attr("id","censusLabelFCC").html("census geography from FCC")
  // d3.select("body").append("div").attr("class","section").attr("id","censusLabelCensus").html("census geography from Census")
   d3.select("body").append("div").attr("class","section").attr("id","data").html("data")
+
+
+  d3.select("body").append("div").attr("class","section").attr("id","chart")
